@@ -2,39 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Sound Kit Marketplace Design System
+All colors MUST be HSL for proper theming support.
+Brand: Deep purple primary, light purple accent, dark backgrounds
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Brand Colors */
+    --primary: 275 100% 29%;        /* #580092 Deep Purple */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+    
+    --accent: 279 68% 76%;          /* #cd9cec Light Purple */
+    --accent-foreground: 275 100% 29%; /* Primary text on accent */
+    
+    --background: 292 71% 5%;       /* #100311 Dark Purple/Black */
+    --foreground: 0 0% 100%;        /* #FFFFFF Text Primary */
+    
+    /* Semantic Colors */
+    --success: 169 100% 42%;        /* #00D4AA */
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 44 100% 50%;         /* #FFB800 */
+    --warning-foreground: 292 71% 5%;
+    
+    --destructive: 0 70% 70%;       /* #FF6B6B */
+    --destructive-foreground: 0 0% 100%;
+    
+    /* UI Colors */
+    --card: 292 40% 8%;             /* Slightly lighter than background */
+    --card-foreground: 0 0% 100%;
+    
+    --secondary: 279 20% 15%;       /* Muted purple for secondary elements */
+    --secondary-foreground: 0 0% 72%; /* #B8B8B8 Text Secondary */
+    
+    --muted: 279 15% 12%;           /* Even more muted */
+    --muted-foreground: 0 0% 72%;   /* #B8B8B8 Text Secondary */
+    
+    --border: 279 30% 20%;          /* Subtle purple border */
+    --input: 279 30% 18%;           /* Input backgrounds */
+    --ring: 275 100% 29%;           /* Focus rings use primary */
+    
+    /* Glass morphism effects */
+    --glass-bg: 279 20% 15% / 0.8;
+    --glass-border: 279 40% 25% / 0.3;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(275 100% 29%), hsl(279 68% 76%));
+    --gradient-dark: linear-gradient(135deg, hsl(292 71% 5%), hsl(279 20% 8%));
+    --gradient-glass: linear-gradient(135deg, 
+      hsla(279, 20%, 15%, 0.8), 
+      hsla(279, 30%, 20%, 0.6)
+    );
+    
+    /* Shadows */
+    --shadow-purple: 0 10px 30px -10px hsl(275 100% 29% / 0.3);
+    --shadow-glow: 0 0 40px hsl(279 68% 76% / 0.4);
+    --shadow-glass: 0 8px 32px hsla(275, 100%, 29%, 0.2);
+    
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -100,6 +128,47 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Glass morphism components */
+  .glass-card {
+    @apply relative bg-gradient-to-br from-glass-bg to-glass-bg/50;
+    @apply border border-glass-border backdrop-blur-lg;
+    @apply rounded-lg shadow-glass;
+  }
+  
+  .glass-button {
+    @apply relative bg-gradient-to-r from-primary to-accent;
+    @apply text-primary-foreground font-medium px-6 py-3 rounded-lg;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-glow;
+    @apply border border-accent/20 backdrop-blur-sm;
+  }
+  
+  /* Audio player components */
+  .waveform-container {
+    @apply relative w-full h-16 bg-secondary/30 rounded-lg overflow-hidden;
+    @apply border border-border backdrop-blur-sm;
+  }
+  
+  .audio-controls {
+    @apply flex items-center gap-3 p-4 bg-card/50 rounded-lg;
+    @apply border border-border backdrop-blur-sm;
+  }
+  
+  /* Hover animations */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:scale-105 hover:shadow-purple;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-glow;
+  }
+  
+  /* Typography */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
 }
