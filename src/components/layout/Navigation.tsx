@@ -28,7 +28,7 @@ const Navigation = () => {
               <Music className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="text-xl font-display font-bold text-gradient hidden sm:block">
-              SoundVibe
+              SouniqSamples
             </span>
           </Link>
 
